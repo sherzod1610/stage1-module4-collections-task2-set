@@ -5,20 +5,22 @@ import java.util.Set;
 
 public class SetCombinationCreator {
     public Set<String> createSetCombination(Set<String> firstSet, Set<String> secondSet, Set<String> thirdSet) {
-        Set<String> stringSet = new HashSet<>();
-        for (String s1 : firstSet) {
-            if (secondSet.contains(s1) & !thirdSet.contains(s1)) {
-                stringSet.add(s1);
-            }
-        }
-        for (String s3 : thirdSet) {
-            if (stringSet.contains(s3)) {
-                stringSet.remove(s3);
-            } else {
-                stringSet.add(s3);
-            }
+        Set<String> resultSet = new HashSet<>();
 
+        // Add elements that belong to the first and second Sets but not to the third Set
+        for (String element : firstSet) {
+            if (secondSet.contains(element) && !thirdSet.contains(element)) {
+                resultSet.add(element);
+            }
         }
-        return stringSet;
+
+        // Add elements that belong only to the third Set
+        for (String element : thirdSet) {
+            if (!firstSet.contains(element) && !secondSet.contains(element)) {
+                resultSet.add(element);
+            }
+        }
+
+        return resultSet;
     }
 }

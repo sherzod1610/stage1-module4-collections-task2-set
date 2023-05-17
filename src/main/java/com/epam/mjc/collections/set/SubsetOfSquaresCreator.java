@@ -7,10 +7,13 @@ import java.util.TreeSet;
 
 public class SubsetOfSquaresCreator {
     public Set<Integer> createSubsetOfSquares(List<Integer> sourceList, int lowerBound, int upperBound) {
-        NavigableSet<Integer> navigableSet = new TreeSet<>();
-        for (Integer i : sourceList) {
-            navigableSet.add(i * i);
+        TreeSet<Integer> squareSet = new TreeSet<>();
+
+        for (Integer num : sourceList) {
+            squareSet.add(num * num);
         }
-        return navigableSet.subSet(lowerBound, upperBound);
+
+        NavigableSet<Integer> subset = squareSet.subSet(lowerBound, true, upperBound, true);
+        return new TreeSet<>(subset);
     }
 }
